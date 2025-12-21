@@ -4,10 +4,7 @@
 </svelte:head>
 
 <section>
-	<h1>
-		Welcome to my Notes
-	</h1>
-
+	<h1>My Notes</h1>
 </section>
 
 <style>

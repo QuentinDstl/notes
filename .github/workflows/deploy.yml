@@ -26,10 +26,12 @@ jobs:
         run: npm run build
       - name: Deploy to GitHub Pages
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          rm -rf !(build|.git|.gitignore|node_modules)
+          git config --local user.email 'action@github.com'
+          git config --local user.name 'GitHub Action'
+          find . -maxdepth 1 -type f -not -name '.gitignore' -delete
+          find . -maxdepth 1 -type d -not -name '.git' -not -name 'node_modules' -not -name '.github' -not -name 'build' -exec rm -rf {} + 2>/dev/null || true
           cp -r build/* .
+          rm -rf build
           git add -A
           git commit -m "Deploy: $(date)" || echo "Nothing to commit"
           git push

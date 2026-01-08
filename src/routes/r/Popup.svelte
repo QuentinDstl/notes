@@ -98,14 +98,21 @@
 			on:keydown={(e) => e.stopPropagation()}
 		>
 			{#if hasSubgames && popupRules[selectedGame]?.subgames}
-				<div class="subgame-menu">
-					{#each Object.entries(popupRules[selectedGame].subgames!) as [key, subgame]}
+				<div class="subgame-bookmarks">
+					{#each Object.entries(popupRules[selectedGame].subgames!) as [key, subgame], index}
 						<button
-							class="subgame-btn"
+							class="subgame-bookmark"
 							class:active={selectedSubgame === key}
+							data-color={key}
 							on:click={() => (selectedSubgame = key)}
+							title={subgame.name}
+							style="--bookmark-index: {index}"
 						>
-							{subgame.name}
+							{#if key === 'oriFlame'}
+								<img src="/ori.svg" alt={subgame.name} class="bookmark-icon" />
+							{:else if key === 'loupGarou'}
+								<img src="/lg.svg" alt={subgame.name} class="bookmark-icon" />
+							{/if}
 						</button>
 					{/each}
 				</div>
@@ -144,44 +151,61 @@
 		max-width: 700px;
 		width: 90%;
 		max-height: 85vh;
-		overflow-y: auto;
 		animation: slideUp 300ms ease-in-out;
-	}
-
-	.subgame-menu {
+		position: relative;
+		margin-top: 40px;
+		z-index: 10;
+		overflow: visible;
 		display: flex;
-		gap: 8px;
-		padding: 16px 40px 0 40px;
-		border-bottom: 1px solid #f0f0f0;
-		background: #fff;
-		border-radius: 12px 12px 0 0;
-		position: sticky;
-		top: 0;
+		flex-direction: column;
+	}
+
+	.subgame-bookmarks {
+		position: absolute;
+		top: -64px;
+		left: 40px;
+		display: flex;
+		gap: 12px;
 		z-index: 11;
-		flex-wrap: wrap;
 	}
 
-	.subgame-btn {
-		padding: 8px 16px;
-		border: 2px solid #e0e0e0;
-		background: #fff;
-		border-radius: 6px;
+	.subgame-bookmark {
+		width: 48px;
+		height: 64px;
+		padding: 8px;
+		border: none;
+		border-radius: 6px 6px 0 0;
 		cursor: pointer;
-		font-size: 14px;
-		font-weight: 500;
-		color: #666;
 		transition: all 200ms ease-in-out;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.subgame-btn:hover {
-		border-color: #999;
-		color: #333;
+	.subgame-bookmark[data-color='oriFlame'] {
+		background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
 	}
 
-	.subgame-btn.active {
-		border-color: #000;
-		background: #000;
-		color: #fff;
+	.subgame-bookmark[data-color='loupGarou'] {
+		background: linear-gradient(135deg, #8b3a3a 0%, #5a2020 100%);
+	}
+
+	.bookmark-icon {
+		width: 24px;
+		height: 24px;
+		object-fit: contain;
+	}
+
+	.subgame-bookmark:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+	}
+
+	.subgame-bookmark.active {
+		transform: translateY(-8px);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+		filter: brightness(1.1);
 	}
 
 	.popup-header {
@@ -232,6 +256,8 @@
 		line-height: 1.8;
 		font-size: 16px;
 		font-weight: 400;
+		overflow-y: auto;
+		max-height: calc(85vh - 120px);
 	}
 
 	.popup-content :global(h2) {

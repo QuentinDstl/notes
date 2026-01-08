@@ -283,7 +283,9 @@
 	}
 
 	.inverted {
-		transform: rotate(180deg);
+		flex-direction: row-reverse;
+		align-items: flex-end;
+		padding: 0 4px 4px 4px;
 	}
 
 	.skyjo {

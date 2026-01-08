@@ -1,7 +1,16 @@
 <script lang="ts">
 	export let selectedGame: string | null;
-	export let popupRules: Record<string, { name: string; rules: string }>;
+	export let popupRules: Record<
+		string,
+		{
+			name: string;
+			rules?: string;
+			subgames?: Record<string, { name: string; rules: string }>;
+		}
+	>;
 	export let onClose: () => void;
+
+	let selectedSubgame: string | null = null;
 
 	function handlePopupKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Escape') {
@@ -9,6 +18,68 @@
 			onClose();
 		}
 	}
+
+	// Extract title from markdown (first H1 or H2)
+	function extractTitle(markdown: string): string {
+		const h1Match = markdown.match(/^#\s+(.+?)$/m);
+		if (h1Match) return h1Match[1];
+		return '';
+	}
+
+	// Remove title from markdown content
+	function removeTitle(markdown: string): string {
+		return markdown.replace(/^#\s+.+?\n\n/m, '');
+	}
+
+	// Simple markdown to HTML converter
+	function markdownToHtml(markdown: string): string {
+		let html = markdown
+			// Headings
+			.replace(/^## (.*?)$/gm, '<h2>$1</h2>')
+			.replace(/^### (.*?)$/gm, '<h3>$1</h3>')
+			// Bold
+			.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+			// Italic
+			.replace(/\*(.*?)\*/g, '<em>$1</em>')
+			// Code blocks
+			.replace(/`(.*?)`/g, '<code>$1</code>')
+			// Lists
+			.replace(/^\- (.*?)$/gm, '<li>$1</li>')
+			.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+			// Paragraphs
+			.replace(/\n\n/g, '</p><p>')
+			.replace(/^(?!<[hu]|<[ul]|<p)(.+)$/gm, '<p>$1</p>');
+
+		return html;
+	}
+
+	$: if (selectedGame && popupRules[selectedGame]?.subgames) {
+		const subgameKeys = Object.keys(popupRules[selectedGame].subgames!);
+		selectedSubgame = subgameKeys[0] || null;
+	}
+
+	$: {
+		if (selectedGame && popupRules[selectedGame]) {
+			const game = popupRules[selectedGame];
+			if (game.subgames && selectedSubgame) {
+				// For games with subgames
+			}
+		}
+	}
+
+	$: currentRules = (() => {
+		if (!selectedGame || !popupRules[selectedGame]) return '';
+		const game = popupRules[selectedGame];
+		if (game.subgames && selectedSubgame && game.subgames[selectedSubgame]) {
+			return game.subgames[selectedSubgame].rules;
+		}
+		return game.rules || '';
+	})();
+
+	$: popupTitle = extractTitle(currentRules);
+	$: popupContent = removeTitle(currentRules);
+
+	$: hasSubgames = selectedGame && popupRules[selectedGame]?.subgames !== undefined;
 </script>
 
 {#if selectedGame && popupRules[selectedGame]}
@@ -26,12 +97,25 @@
 			on:click={(e) => e.stopPropagation()}
 			on:keydown={(e) => e.stopPropagation()}
 		>
+			{#if hasSubgames && popupRules[selectedGame]?.subgames}
+				<div class="subgame-menu">
+					{#each Object.entries(popupRules[selectedGame].subgames!) as [key, subgame]}
+						<button
+							class="subgame-btn"
+							class:active={selectedSubgame === key}
+							on:click={() => (selectedSubgame = key)}
+						>
+							{subgame.name}
+						</button>
+					{/each}
+				</div>
+			{/if}
 			<div class="popup-header">
-				<h2>{popupRules[selectedGame].name}</h2>
+				<h2>{popupTitle}</h2>
 				<button class="close-btn" on:click={onClose}>×</button>
 			</div>
 			<div class="popup-content">
-				<p>{popupRules[selectedGame].rules}</p>
+				{@html markdownToHtml(popupContent)}
 			</div>
 		</div>
 	</div>
@@ -55,30 +139,69 @@
 
 	.popup-rules {
 		background-color: #fff;
-		border-radius: 8px;
+		border-radius: 12px;
 		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-		max-width: 600px;
+		max-width: 700px;
 		width: 90%;
-		max-height: 80vh;
+		max-height: 85vh;
 		overflow-y: auto;
 		animation: slideUp 300ms ease-in-out;
+	}
+
+	.subgame-menu {
+		display: flex;
+		gap: 8px;
+		padding: 16px 40px 0 40px;
+		border-bottom: 1px solid #f0f0f0;
+		background: #fff;
+		border-radius: 12px 12px 0 0;
+		position: sticky;
+		top: 0;
+		z-index: 11;
+		flex-wrap: wrap;
+	}
+
+	.subgame-btn {
+		padding: 8px 16px;
+		border: 2px solid #e0e0e0;
+		background: #fff;
+		border-radius: 6px;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: 500;
+		color: #666;
+		transition: all 200ms ease-in-out;
+	}
+
+	.subgame-btn:hover {
+		border-color: #999;
+		color: #333;
+	}
+
+	.subgame-btn.active {
+		border-color: #000;
+		background: #000;
+		color: #fff;
 	}
 
 	.popup-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 32px;
-		border-bottom: 1px solid #e5e5e5;
+		padding: 40px;
+		border-bottom: 1px solid #f0f0f0;
 		background: #fff;
-		border-radius: 8px 8px 0 0;
+		border-radius: 12px 12px 0 0;
+		position: sticky;
+		top: 0;
+		z-index: 10;
 	}
 
 	.popup-header h2 {
 		margin: 0;
 		color: #000;
-		font-size: 28px;
-		font-weight: 600;
+		font-size: 32px;
+		font-weight: 700;
 		letter-spacing: -0.5px;
 	}
 
@@ -86,30 +209,113 @@
 		background: none;
 		border: none;
 		font-size: 28px;
-		color: #666;
+		color: #999;
 		cursor: pointer;
-		padding: 0;
-		width: 40px;
-		height: 40px;
+		padding: 8px;
+		width: 44px;
+		height: 44px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		transition: color 100ms ease-in-out;
+		transition: color 200ms ease-in-out;
+		border-radius: 6px;
 	}
 
 	.close-btn:hover {
-		color: #000;
+		background-color: #f5f5f5;
+		color: #333;
 	}
 
 	.popup-content {
-		padding: 32px;
+		padding: 40px;
 		color: #333;
 		line-height: 1.8;
 		font-size: 16px;
+		font-weight: 400;
 	}
 
-	.popup-content p {
-		margin: 0;
+	.popup-content :global(h2) {
+		margin: 32px 0 16px 0;
+		font-size: 22px;
+		font-weight: 600;
+		color: #000;
+		margin-top: 40px;
+	}
+
+	.popup-content :global(h2:first-child) {
+		margin-top: 0;
+	}
+
+	.popup-content :global(h3) {
+		margin: 24px 0 12px 0;
+		font-size: 18px;
+		font-weight: 600;
+		color: #1a1a1a;
+	}
+
+	.popup-content :global(p) {
+		margin: 16px 0;
+		line-height: 1.8;
+		color: #555;
+	}
+
+	.popup-content :global(strong) {
+		font-weight: 600;
+		color: #000;
+	}
+
+	.popup-content :global(em) {
+		font-style: italic;
+		color: #666;
+	}
+
+	.popup-content :global(code) {
+		background-color: #f5f5f5;
+		padding: 2px 6px;
+		border-radius: 4px;
+		font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+		font-size: 14px;
+		color: #d14;
+	}
+
+	.popup-content :global(ul) {
+		margin: 16px 0;
+		padding-left: 0;
+		list-style: none;
+	}
+
+	.popup-content :global(li) {
+		margin: 12px 0;
+		padding-left: 28px;
+		position: relative;
+		color: #555;
+	}
+
+	.popup-content :global(li::before) {
+		content: '•';
+		position: absolute;
+		left: 8px;
+		color: #ccc;
+		font-weight: 600;
+		font-size: 18px;
+	}
+
+	/* Scrollbar styling */
+	.popup-rules ::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	.popup-rules ::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.popup-rules ::-webkit-scrollbar-thumb {
+		background: #e0e0e0;
+		border-radius: 4px;
+	}
+
+	.popup-rules ::-webkit-scrollbar-thumb:hover {
+		background: #999;
 	}
 
 	@keyframes fadeIn {
@@ -123,7 +329,7 @@
 
 	@keyframes slideUp {
 		from {
-			transform: translateY(30px);
+			transform: translateY(20px);
 			opacity: 0;
 		}
 		to {

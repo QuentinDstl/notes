@@ -1,6 +1,12 @@
 <script lang="ts">
 	import Card from './Card.svelte';
 	import Popup from './Popup.svelte';
+	import tarotRules from './rules/tarot.md?raw';
+	import sixqpRules from './rules/sixqp.md?raw';
+	import skyjoRules from './rules/skyjo.md?raw';
+	import oriFlameRules from './rules/oriFlame.md?raw';
+	import loupGarouRules from './rules/loupGarou.md?raw';
+	import codeNamesRules from './rules/codeNames.md?raw';
 
 	let selectedGame: string | null = null;
 	let hoveredGame: string | null = null;
@@ -8,27 +14,32 @@
 	const popupRules = {
 		tarot: {
 			name: 'Tarot',
-			rules:
-				'Le tarot est un jeu de cartes avec 78 cartes divisées en arcanes majeurs et mineurs. Les joueurs interprètent les cartes pour obtenir des insights.'
+			rules: tarotRules
 		},
 		sixqp: {
 			name: 'Six qui prend',
-			rules:
-				'Un jeu où les joueurs posent des cartes numérotées. Si votre carte fait que la ligne atteint 6 cartes, vous devez en prendre une. Évitez les cartes avec beaucoup de têtes de bœuf!'
+			rules: sixqpRules
 		},
 		skyjo: {
 			name: 'Skyjo',
-			rules:
-				"Un jeu de cartes où vous essayez d'avoir le plus petit score possible. Retournez ou remplacez vos cartes pour minimiser votre total."
+			rules: skyjoRules
 		},
 		oriLg: {
 			name: 'Origine Large',
-			rules: 'Les règles du jeu Origine Large.'
+			subgames: {
+				oriFlame: {
+					name: 'Oriflamme',
+					rules: oriFlameRules
+				},
+				loupGarou: {
+					name: 'Loup Garou',
+					rules: loupGarouRules
+				}
+			}
 		},
 		codeNames: {
 			name: 'Codenames',
-			rules:
-				'Un jeu de mots où une équipe donne des indices pour faire deviner des mots secrets. Évitez les pièges!'
+			rules: codeNamesRules
 		}
 	};
 

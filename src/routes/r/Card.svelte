@@ -136,7 +136,7 @@
 				on:mouseenter={() => onGameHover('codeNames')}
 				on:mouseleave={onGameLeave}
 			>
-				<div style="transform: rotate(180deg);">
+				<div class="rotated">
 					<CodenamesWordsIcon width="36" height="193" />
 				</div>
 			</div>
@@ -152,7 +152,7 @@
 				on:mouseenter={() => onGameHover('tarot')}
 				on:mouseleave={onGameLeave}
 			>
-				<div style="transform: rotate(180deg);">
+				<div class="rotated">
 					<TarotIcon width="45" height="45" />
 				</div>
 			</div>
@@ -178,7 +178,7 @@
 				on:mouseenter={() => onGameHover('skyjo')}
 				on:mouseleave={onGameLeave}
 			>
-				<div style="transform: rotate(180deg);">
+				<div class="rotated">
 					<SkyjoIcon width="45" height="45" />
 				</div>
 			</div>
@@ -186,98 +186,66 @@
 	</div>
 </div>
 
-<style>
-	.wrapper {
+<style lang="scss">
+	// Variables
+	$spacing: 4px;
+	$border-color: white;
+	$border-radius: 3px;
+	$card-width: 205px;
+	$card-height: 299px;
+	$card-border: 11px;
+	$transition-fast: 100ms ease-in-out;
+	$transition-normal: 125ms ease-in-out;
+	$semi-white: rgba(255, 255, 255, 0.5);
+
+	// Mixins
+	@mixin flex-center {
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		width: 100%;
-		flex: 1;
+		justify-content: center;
 	}
 
-	.card {
-		width: 205px;
-		height: 299px;
-		background-image: url('/fond.png');
-		background-size: cover;
-		background-position: center;
-		border-radius: 14px;
-		border: 11px solid white;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	@mixin flex-container($direction: row, $gap: $spacing) {
 		display: flex;
-		flex-direction: column;
-		gap: 4px;
-		transition: transform 125ms ease-in-out;
+		flex-direction: $direction;
+		gap: $gap;
 	}
 
-	.card-top {
-		height: 45px;
-		display: flex;
-		padding: 4px 4px 0 4px;
-		gap: 4px;
-	}
-
-	.card-mid {
-		flex: 1;
-		display: flex;
-		gap: 4px;
-		padding: 0 4px 0 4px;
-	}
-
-	.tarot,
-	.sixqp,
-	.skyjo,
-	.ori-lg,
-	.codenames-words,
-	.codenames-map {
+	@mixin interactive {
 		cursor: pointer;
 		transition:
-			transform 100ms ease-in-out,
-			box-shadow 100ms ease-in-out;
+			transform $transition-fast,
+			box-shadow $transition-fast;
 		position: relative;
 		overflow: hidden;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: -100px;
+			left: -75px;
+			width: 50px;
+			height: 350px;
+			background: linear-gradient(
+				90deg,
+				rgba(255, 255, 255, 0) 0%,
+				rgba(255, 255, 255, 0.5) 50%,
+				rgba(255, 255, 255, 0) 100%
+			);
+			opacity: 0.3;
+			transform: rotate(35deg);
+			z-index: 10;
+			animation: metallic-sweep 1.5s ease-in-out infinite;
+		}
+
+		&:hover,
+		&.hovered {
+			transform: translateY(-8px);
+			box-shadow: 0 12px 16px rgba(0, 0, 0, 0.3);
+		}
 	}
 
-	.tarot::after,
-	.sixqp::after,
-	.skyjo::after,
-	.ori-lg::after,
-	.codenames-words::after,
-	.codenames-map::after {
-		content: '';
-		position: absolute;
-		top: -100px;
-		left: -75px;
-		width: 50px;
-		height: 350px;
-		background: linear-gradient(
-			90deg,
-			rgba(255, 255, 255, 0) 0%,
-			rgba(255, 255, 255, 0.5) 50%,
-			rgba(255, 255, 255, 0) 100%
-		);
-		opacity: 0.3;
-		transform: rotate(35deg);
-		z-index: 10;
-		animation: metallic-sweep 1.5s ease-in-out infinite;
-	}
-
-	.tarot:hover,
-	.sixqp:hover,
-	.skyjo:hover,
-	.ori-lg:hover,
-	.codenames-words:hover,
-	.codenames-map:hover,
-	.tarot.hovered,
-	.sixqp.hovered,
-	.skyjo.hovered,
-	.ori-lg.hovered,
-	.codenames-words.hovered,
-	.codenames-map.hovered {
-		transform: translateY(-8px);
-		box-shadow: 0 12px 16px rgba(0, 0, 0, 0.3);
-	}
-
+	// Keyframes
 	@keyframes metallic-sweep {
 		0% {
 			left: -75px;
@@ -292,73 +260,100 @@
 		}
 	}
 
+	// Styles
+	.wrapper {
+		@include flex-center;
+		width: 100%;
+		flex: 1;
+	}
+
+	.card {
+		width: $card-width;
+		height: $card-height;
+		background-image: url('/fond.png');
+		background-size: cover;
+		background-position: center;
+		border-radius: 14px;
+		border: $card-border solid $border-color;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		@include flex-container(column, $spacing);
+		transition: transform $transition-normal;
+	}
+
+	.card-top {
+		height: 45px;
+		padding: $spacing $spacing 0 $spacing;
+		@include flex-container(row, $spacing);
+
+		&.inverted {
+			flex-direction: row-reverse;
+			align-items: flex-end;
+			padding: 0 $spacing $spacing $spacing;
+		}
+	}
+
+	.card-mid {
+		@include flex-container(row, $spacing);
+		flex: 1;
+		padding: 0 $spacing 0 $spacing;
+	}
+
+	.tarot,
+	.sixqp,
+	.skyjo,
+	.ori-lg,
+	.codenames-words,
+	.codenames-map {
+		@include interactive;
+		border-radius: $border-radius;
+	}
+
 	.tarot {
 		width: 45px;
 		height: 45px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 3px;
+		@include flex-center;
 	}
 
 	.sixqp {
 		flex: 1;
 		height: 36px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 3px;
-	}
-
-	.inverted {
-		flex-direction: row-reverse;
-		align-items: flex-end;
-		padding: 0 4px 4px 4px;
+		@include flex-center;
 	}
 
 	.skyjo {
 		width: 45px;
 		height: 45px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 3px;
+		@include flex-center;
 	}
 
 	.codenames-words {
 		width: 36px;
-		border-radius: 3px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background-color: rgba(255, 255, 255, 0.5);
+		@include flex-center;
+		background-color: $semi-white;
 	}
 
 	.middle-space {
+		@include flex-container(column, 32px);
 		flex: 1;
 		justify-content: center;
 		align-items: center;
-		display: flex;
-		flex-direction: column;
-		gap: 32px;
 	}
 
 	.ori-lg {
 		width: 102px;
 		height: 60px;
-		background-color: rgba(255, 255, 255, 0.5);
-		border-radius: 3px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		background-color: $semi-white;
+		@include flex-center;
 	}
 
 	.codenames-map {
 		width: 92px;
 		height: 92px;
-		border-radius: 3px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		@include flex-center;
+	}
+
+	.rotated {
+		transform: rotate(180deg);
+		@include flex-center;
 	}
 </style>

@@ -65,12 +65,15 @@
 	<meta name="description" content="Règles page" />
 </svelte:head>
 
-<Card
-	{hoveredGame}
-	onGameHover={handleGameHover}
-	onGameLeave={handleGameLeave}
-	onShowRules={handleShowRules}
-/>
+<div class="container">
+	<p class="instruction">Clique sur une partie de la carte pour voir les règles du jeu</p>
+	<Card
+		{hoveredGame}
+		onGameHover={handleGameHover}
+		onGameLeave={handleGameLeave}
+		onShowRules={handleShowRules}
+	/>
+</div>
 
 <Popup {selectedGame} {popupRules} onClose={handleClosePopup} />
 
@@ -78,5 +81,19 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
+	}
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.instruction {
+		margin-top: 1rem;
+		margin-bottom: 1.5rem;
+		color: #666;
+		font-size: 0.95rem;
+		text-align: center;
 	}
 </style>

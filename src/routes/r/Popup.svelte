@@ -162,11 +162,11 @@
 
 	.subgame-bookmarks {
 		position: absolute;
-		top: -64px;
+		top: -50px;
 		left: 40px;
 		display: flex;
 		gap: 12px;
-		z-index: 11;
+		z-index: 9;
 	}
 
 	.subgame-bookmark {
@@ -179,7 +179,7 @@
 		transition: all 200ms ease-in-out;
 		position: relative;
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
 	}
 
@@ -212,7 +212,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 40px;
+		padding: 16px;
 		border-bottom: 1px solid #f0f0f0;
 		background: #fff;
 		border-radius: 12px 12px 0 0;

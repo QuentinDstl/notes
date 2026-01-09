@@ -136,7 +136,9 @@
 				on:mouseenter={() => onGameHover('codeNames')}
 				on:mouseleave={onGameLeave}
 			>
-				<CodenamesWordsIcon width="36" height="193" />
+				<div style="transform: rotate(180deg);">
+					<CodenamesWordsIcon width="36" height="193" />
+				</div>
 			</div>
 		</div>
 		<div class="card-top inverted">

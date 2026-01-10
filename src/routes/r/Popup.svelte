@@ -112,6 +112,14 @@
 								<img src="/bookmarks/ori.svg" alt={subgame.name} class="bookmark-icon" />
 							{:else if key === 'loupGarou'}
 								<img src="/bookmarks/lg.svg" alt={subgame.name} class="bookmark-icon" />
+							{:else if key === 'tarot'}
+								<img src="/bookmarks/tarot.svg" alt={subgame.name} class="bookmark-icon" />
+							{:else if key === 'tarotAfricain'}
+								<img src="/bookmarks/tarotAf.svg" alt={subgame.name} class="bookmark-icon" />
+							{:else if key === 'eightAmerican'}
+								<img src="/bookmarks/8american.svg" alt={subgame.name} class="bookmark-icon" />
+							{:else if key === 'ascenseur'}
+								<img src="/bookmarks/ascenseur.svg" alt={subgame.name} class="bookmark-icon" />
 							{/if}
 						</button>
 					{/each}
@@ -240,10 +248,9 @@
 
 	.subgame-bookmark {
 		width: 48px;
-		height: 64px;
+		height: 75px;
 		padding: $spacing-md;
 		border: none;
-		border-radius: $border-radius-md $border-radius-md 0 0;
 		cursor: pointer;
 		@include transition(all);
 		position: relative;
@@ -252,22 +259,38 @@
 		align-items: flex-start;
 
 		&[data-color='oriFlame'] {
-			background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+			background: linear-gradient(135deg, #ffccaa 0%, #ffddb3 100%);
 		}
 
 		&[data-color='loupGarou'] {
-			background: linear-gradient(135deg, #8b3a3a 0%, #5a2020 100%);
+			background: linear-gradient(135deg, #d4a5a5 0%, #d9b8b8 100%);
+		}
+
+		&[data-color='tarot'] {
+			background: linear-gradient(135deg, #f5a5a5 0%, #f0b3b3 100%);
+		}
+
+		&[data-color='tarotAfricain'] {
+			background: linear-gradient(135deg, #d4d4d4 0%, #e0e0e0 100%);
+		}
+
+		&[data-color='eightAmerican'] {
+			background: linear-gradient(135deg, #b3d9ff 0%, #cce5ff 100%);
+		}
+
+		&[data-color='ascenseur'] {
+			background: linear-gradient(135deg, #a5e6b3 0%, #b8f0c4 100%);
 		}
 
 		&:hover {
 			transform: translateY(-4px);
-			box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+			box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 		}
 
 		&.active {
 			transform: translateY(-8px);
-			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-			filter: brightness(1.1);
+			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+			filter: brightness(0.95);
 		}
 	}
 

@@ -2,6 +2,9 @@
 	import Card from './Card.svelte';
 	import Popup from './Popup.svelte';
 	import tarotRules from './rules/tarot.md?raw';
+	import tarotAfricainRules from './rules/tarotAfricain.md?raw';
+	import eightAmericanRules from './rules/8americain.md?raw';
+	import ascenseurRules from './rules/ascenseur.md?raw';
 	import sixqpRules from './rules/sixqp.md?raw';
 	import skyjoRules from './rules/skyjo.md?raw';
 	import oriFlameRules from './rules/oriFlame.md?raw';
@@ -14,7 +17,24 @@
 	const popupRules = {
 		tarot: {
 			name: 'Tarot',
-			rules: tarotRules
+			subgames: {
+				tarot: {
+					name: 'Tarot',
+					rules: tarotRules
+				},
+				tarotAfricain: {
+					name: 'Tarot Africain',
+					rules: tarotAfricainRules
+				},
+				eightAmerican: {
+					name: '8 Américain',
+					rules: eightAmericanRules
+				},
+				ascenseur: {
+					name: 'Ascenseur',
+					rules: ascenseurRules
+				}
+			}
 		},
 		sixqp: {
 			name: 'Six qui prend',

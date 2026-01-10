@@ -109,17 +109,17 @@
 							style="--bookmark-index: {index}"
 						>
 							{#if key === 'oriFlame'}
-								<img src="/bookmarks/ori.svg" alt={subgame.name} class="bookmark-icon" />
+								<img src="./bookmarks/ori.svg" alt={subgame.name} class="bookmark-icon" />
 							{:else if key === 'loupGarou'}
-								<img src="/bookmarks/lg.svg" alt={subgame.name} class="bookmark-icon" />
+								<img src="./bookmarks/lg.svg" alt={subgame.name} class="bookmark-icon" />
 							{:else if key === 'tarot'}
-								<img src="/bookmarks/tarot.svg" alt={subgame.name} class="bookmark-icon" />
+								<img src="./bookmarks/tarot.svg" alt={subgame.name} class="bookmark-icon" />
 							{:else if key === 'tarotAfricain'}
-								<img src="/bookmarks/tarotAf.svg" alt={subgame.name} class="bookmark-icon" />
+								<img src="./bookmarks/tarotAf.svg" alt={subgame.name} class="bookmark-icon" />
 							{:else if key === 'eightAmerican'}
-								<img src="/bookmarks/8american.svg" alt={subgame.name} class="bookmark-icon" />
+								<img src="./bookmarks/8american.svg" alt={subgame.name} class="bookmark-icon" />
 							{:else if key === 'ascenseur'}
-								<img src="/bookmarks/ascenseur.svg" alt={subgame.name} class="bookmark-icon" />
+								<img src="./bookmarks/ascenseur.svg" alt={subgame.name} class="bookmark-icon" />
 							{/if}
 						</button>
 					{/each}

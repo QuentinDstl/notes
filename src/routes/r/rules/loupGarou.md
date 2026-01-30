@@ -1,5 +1,7 @@
 # Loup Garou
 
+**Joueurs :** 6-15 | **Durée :** 20-45 minutes
+
 ## 1. Matériel et Objectif
 
 **Matériel :** Cartes de rôles (Loup Garou, Villageois, Voyante, Chasseur, etc.). Un meneur de jeu.

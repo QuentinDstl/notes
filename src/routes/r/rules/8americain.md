@@ -1,5 +1,7 @@
 # 8 Américain
 
+**Joueurs :** 2-5 | **Durée :** 15-20 minutes
+
 ## 1. But du Jeu et Mise en Place
 
 **Objectif :** Être le premier à se débarrasser de toutes ses cartes.

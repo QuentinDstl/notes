@@ -1,12 +1,19 @@
 # Oriflamme
 
+**Joueurs :** 2-5 | **Durée :** 30-60 minutes
+
 ## 1. But du Jeu et Mise en Place
 
-**Objectif :** Accumuler le plus de points d'Influence après 6 tours de jeu.
+**Objectif :** Accumuler le plus de points d'Influence après 7 tours de jeu.
 
-**Matériel :** 50 cartes Influence (10 par couleur), des jetons Point d'Influence, une tuile Premier joueur et une tuile Sens de résolution.
+**Matériel :**
 
-**Mise en place :** Chaque joueur reçoit les 10 cartes de sa couleur, en écarte 3 au hasard (face cachée) et garde les 7 restantes en main. Tout le monde commence avec 1 point d'Influence.
+- 50 cartes Couronne : 10 par joueur (à trier en fonction des logos au dos des cartes mais attention il faut retirer les cartes loup garou / avec une lune)
+- la carte excuse qui permet d'identifier le premier joueur du tour
+- [♟️ A AJOUTER] des jetons Point d'Influence : $ (ne sont pas fournis donc faut vous creuser le crane)
+
+
+**Mise en place :** Chaque joueur reçoit ses 10 cartes avec son logo au dos et le texte explicatif à l'avant avec la petite couronne, en écarte 3 au hasard (face cachée) et garde les 7 restantes en main. Tout le monde commence avec 1$.
 
 ## 2. Déroulement d'un Tour (2 Phases)
 
@@ -20,9 +27,12 @@ La partie se joue sur une ligne centrale appelée la File d'Influence.
 
 ### Phase 2 : La Résolution
 
-On parcourt la File dans le sens indiqué par la tuile. Pour chaque carte face cachée de sa couleur, le joueur choisit :
+Le plus jeune joueur commence et récupère la carte excuse, il sera le premier joueur à jouer pour le premier tour puis passera la carte pour le prochain tour.
+La File doit alors etre placé perpendiculairement au possesseur de la carte, elle se parcourt de gauche à droite et la partie se déroulera dans le sens horraire.
 
-- **Laisser face cachée :** On place 1 point d'Influence de la réserve sur la carte.
+Pour chaque carte face cachée de sa couleur, le joueur choisit :
+
+- **Laisser face cachée :** On place 1$ de la réserve sur la carte.
 - **Révéler la carte :** Le joueur récupère tous les points sur la carte et doit appliquer sa capacité.
 - **Si la carte est déjà révélée :** On applique obligatoirement sa capacité à chaque tour.
 
@@ -33,7 +43,7 @@ On parcourt la File dans le sens indiqué par la tuile. Pour chaque carte face c
 - **Archer :** Élimine la première ou la dernière carte de la File (révélée ou non).
 - **Soldat :** Élimine une carte adjacente (révélée ou non).
 - **Assassinat :** Élimine une carte n'importe où dans la File, puis l'Assassinat est défaussé.
-- **Note sur l'attaque :** Si vous n'avez pas d'autre choix, vous devez éliminer votre propre famille, mais vous gagnez tout de même le point d'élimination.
+- **Note sur l'attaque :** Si vous n'avez pas d'autre choix, vous devez éliminer votre propre famille, mais vous gagnez tout de même 1$ pour l'élimination.
 
 ### Personnages de Gain d'Influence
 

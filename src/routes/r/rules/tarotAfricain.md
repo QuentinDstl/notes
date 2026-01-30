@@ -1,5 +1,7 @@
 # Tarot Africain
 
+**Joueurs :** 3-5 | **Durée :** 30-60 minutes
+
 ## 1. But du Jeu et Mise en Place
 
 **Objectif :** Être le dernier joueur à avoir des vies (les autres atteignent 0).

@@ -1,5 +1,7 @@
 # Tarot
 
+**Joueurs :** 3-5 | **Durée :** 45-90 minutes
+
 ## 1. Le Matériel et l'Objectif
 
 **Le jeu :** 78 cartes, dont 4 couleurs classiques (14 cartes par couleur), 21 Atouts et l'Excuse.

@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
 
-
 :root {
-	--font-body: 'Times New Roman', Times, serif;
+	--font-body: 'Google Sans', sans-serif;
 	--font-title: 'Calistoga', serif;
 	--color-bg: rgb(202, 216, 228);
 	--color-main: hsl(209, 36%, 86%);
@@ -14,6 +14,14 @@
 	--column-margin-top: 4rem;
 	font-family: var(--font-body);
 	color: var(--color-text);
+}
+
+.google-sans-normal {
+	font-family: "Google Sans", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	font-variation-settings: "GRAD" 0;
 }
 
 body {

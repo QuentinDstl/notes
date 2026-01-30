@@ -1,5 +1,7 @@
 # Codenames
 
+**Joueurs :** 4-8 | **Durée :** 15-30 minutes
+
 ## 1. Matériel et Objectif
 
 **Matériel :** 400 cartes mots (en deux langues), 25 cartes de grille spéciales, des jetons d'équipe rouge et bleu.

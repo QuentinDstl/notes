@@ -1,5 +1,7 @@
 # Ascenseur
 
+**Joueurs :** 4-6 | **Durée :** 30-45 minutes
+
 ## 1. But du Jeu et Mise en Place
 
 **Objectif :** Faire un maximum de levées pour obtenir le plus de points.

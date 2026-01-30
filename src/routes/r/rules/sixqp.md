@@ -1,10 +1,12 @@
 # Six qui prend
 
+**Joueurs :** 2-10 | **Durée :** 20-30 minutes
+
 ## 1. Matériel et Objectif
 
-**Matériel :** 104 cartes numérotées de 1 à 104. Chaque carte porte un nombre de "têtes de bœuf" (pénalités) de 1 à 7.
+**Matériel :** 80 cartes numérotées de 1 à 80. Chaque carte porte un nombre de pénalités de 1 à 5.
 
-**Objectif :** Avoir le moins de points (têtes de bœuf) possibles à la fin de la partie. Évitez de prendre des cartes avec beaucoup de têtes de bœuf !
+**Objectif :** Avoir le moins de points (pénalités) possibles à la fin de la partie. Évitez de prendre des cartes avec beaucoup de pénalités !
 
 ## 2. Mise en Place
 
@@ -23,12 +25,12 @@ Une fois que tous les joueurs ont joué leur carte, celles-ci sont révélées *
 
 ## 4. Les Cartes "Tête de Bœuf"
 
-Chaque carte possède un nombre de têtes de bœuf qui représente des points de pénalité :
+Chaque carte possède un nombre de pénalités qui représente des points de pénalité :
 
 - Cartes numérotées : 1 tête de bœuf (sauf exceptions spéciales)
-- Cartes multiples de 5 : 2 têtes de bœuf
-- Cartes multiples de 10 : 3 têtes de bœuf
-- Cartes multiples de 55 : 7 têtes de bœuf (carte très pénalisante !)
+- Cartes multiples de 5 : 2 pénalités
+- Cartes multiples de 10 : 3 pénalités
+- Cartes multiples de 11 : 5 pénalités
 
 ## 5. Fin de la Partie
 
